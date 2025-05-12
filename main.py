@@ -1,5 +1,6 @@
 # QOTD
 import os, sys, time, random, json, datetime, pytz
+time.sleep(5) # Wait for postgres to start
 
 import psycopg2
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
@@ -57,4 +58,4 @@ def qotd():
         return jsonify({"quotes":quotes}), 200
     
 
-app.run(debug=True, port=4054)
+app.run(debug=True, port=8080)
