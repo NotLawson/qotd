@@ -57,5 +57,58 @@ def qotd():
         quotes = cursor.fetchall()
         return jsonify({"quotes":quotes}), 200
     
+@app.route('/api/quote/<int:id>', methods=['GET', 'PUT', 'DELETE'])
+def quote(id):
+    if request.method == 'GET':
+        cursor.execute("SELECT * FROM quotes WHERE id = %s", (id,))
+        quote = cursor.fetchone()
+        if not quote:
+            return jsonify({"error": "Quote not found"}), 404
+        return jsonify({"quote": quote}), 200
+    
+    if request.method == 'PUT':
+        data = request.get_json()
+        quote = data.get("quote")
+        person = data.get("person")
+        if not quote or not person:
+            return jsonify({"error": "Quote and person are required"}), 400
+        cursor.execute("UPDATE quotes SET quote = %s, person = %s WHERE id = %s", (quote, person, id))
+        return jsonify({"message": "Quote updated successfully"}), 200
+    
+    if request.method == 'DELETE':
+        cursor.execute("DELETE FROM quotes WHERE id = %s", (id,))
+        return jsonify({"message": "Quote deleted successfully"}), 200
+    
+@app.route('/api/vote/<int:id>', methods=['POST', 'DELETE'])
+def vote(id):
+    if request.method == 'POST':
+        cursor.execute("UPDATE quotes SET votes = votes + 1 WHERE id = %s", (id,))
+        return jsonify({"message": "Vote added successfully"}), 200
+    
+    if request.method == 'DELETE':
+        cursor.execute("UPDATE quotes SET votes = votes - 1 WHERE id = %s", (id,))
+        return jsonify({"message": "Vote removed successfully"}), 200
+
+@app.route('/api/all', methods=['GET'])
+def all_quotes():
+    cursor.execute("SELECT * FROM quotes ORDER BY created_at DESC")
+    quotes = cursor.fetchall()
+    return jsonify({"quotes": quotes}), 200
+
+@app.route('/api/random', methods=['GET'])
+def random_quote():
+    cursor.execute("SELECT * FROM quotes ORDER BY RANDOM() LIMIT 1")
+    quote = cursor.fetchone()
+    if not quote:
+        return jsonify({"error": "No quotes found"}), 404
+    return jsonify({"quote": quote}), 200
+
+@app.route('/api/quotesforperson/<string:person>', methods=['GET'])
+def quotes_for_person(person):
+    cursor.execute("SELECT * FROM quotes WHERE person = %s", (person,))
+    quotes = cursor.fetchall()
+    if not quotes:
+        return jsonify({"error": "No quotes found for this person"}), 404
+    return jsonify({"quotes": quotes}), 200
 
 app.run(debug=True, host="0.0.0.0", port=8080)
