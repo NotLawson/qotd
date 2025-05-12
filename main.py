@@ -20,7 +20,7 @@ cursor.execute('''
             id SERIAL PRIMARY KEY,
             quote TEXT NOT NULL,
             person TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             votes INT DEFAULT 0,
         )
     ''')
