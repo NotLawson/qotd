@@ -56,3 +56,5 @@ def qotd():
         quotes = cursor.fetchall()
         return jsonify({"quotes":quotes}), 200
     
+
+app.run(debug=True, port=4054)
