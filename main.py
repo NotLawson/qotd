@@ -21,7 +21,7 @@ cursor.execute('''
             quote TEXT NOT NULL,
             person TEXT NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            votes INT DEFAULT 0,
+            votes INT DEFAULT 0
         )
     ''')
 
