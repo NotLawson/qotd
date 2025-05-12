@@ -44,7 +44,7 @@ def qotd():
         if not quote or not person:
             return jsonify({"error": "Quote and person are required"}), 400
         cursor.execute("SELECT id FROM quotes where quote = %s and person = %s", (quote, person))
-        if len(cursor.fetchone())!=0:
+        if cursor.fetchone():
             return jsonify({"error": "Quote already exists"}), 400
         
         now = datetime.datetime.now(tz=pytz.timezone("Australia/Brisbane"))
