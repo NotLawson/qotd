@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - "4054:8080"
+      - "8080:4054"
     restart: always
 
   postgres:
