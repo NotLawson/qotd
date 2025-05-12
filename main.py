@@ -5,7 +5,7 @@ import psycopg2
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify
 
 connection = psycopg2.connect(
-    host="localhost",
+    host="postgres",
     database="qotd",
     user="postgres",
     password="password",
