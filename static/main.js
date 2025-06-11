@@ -3,7 +3,7 @@
 var PAGE = "main";
 
 function open(page) {
-    console.log("Opening page: " + page + " from " + PAGE);m, m, 
+    console.log("Opening page: " + page + " from " + PAGE);
     if (page == PAGE) return;
     var currentPage = document.getElementById(PAGE);
     var newPage = document.getElementById(page);
