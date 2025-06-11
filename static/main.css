@@ -1,0 +1,40 @@
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 0.5fr;
+}
+
+.stage {
+    text-align: left;
+    padding: 20px;
+    border: 1px solid red;
+    grid-column: 2;
+}
+
+.main_quote {
+    border: 3px dotted black;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    font-size: x-large;
+}
+
+.quote {
+    border: 3px dotted black;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.vote {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+    font-size: small;
+    width: 40px;    
+    height: 40px;
+}
